@@ -24,7 +24,7 @@ namespace MinesweeperWebApp.Controllers
         {
             UserSecurityService service = new UserSecurityService();
             if (service.Authenticate(user))
-                return View("LoginPassed");
+                return Redirect("/Game");
             else
                 return View("LoginFailed");
         }
