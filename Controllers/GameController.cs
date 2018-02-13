@@ -11,16 +11,31 @@ namespace MinesweeperWebApp.Controllers
     public class GameController : Controller
     {
         static MinesweeperGame g = new MinesweeperGame();
-        static CellModel[,] TheGrid = g.Generate();
         // GET: Game
         public ActionResult Index()
         {
-            return View("Game", TheGrid);
+            return View("Game", g);
         }
 
-        public ActionResult OnButtonClick()
+        public ActionResult OnCellClick(string cell)
         {
-            return View("Game", TheGrid);
+            for(int row = 0; row < g.Length; row++)
+            {
+                for(int col = 0; col < g.Length; col++)
+                {
+                    if(cell.Equals(row + ", " + col))
+                    {
+                        g.ProcessCell(g.TheGrid[row, col]);
+                    }
+                }
+            }
+            return View("Game", g);
+        }
+
+        public ActionResult Restart()
+        {
+            g = new MinesweeperGame();
+            return View("Game", g);
         }
     }
 }

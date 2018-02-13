@@ -23,7 +23,7 @@ namespace MinesweeperWebApp.Models
             foreach(CellModel c in TheGrid)
             {
                 int activate = rnd.Next(1, 100);
-                if(activate <=15)
+                if(activate <=10)
                 {
                     c.IsLive = true;
                     LiveCells++;
@@ -53,7 +53,7 @@ namespace MinesweeperWebApp.Models
                 c.LiveNeighbors++;
         }
 
-        public bool IsValid(int x, int y)
+        private bool IsValid(int x, int y)
         {
             if (x >= 0 && x < Length && y >= 0 && y <Length)
             {

@@ -1,4 +1,4 @@
-﻿@model MinesweeperWebApp.Models.CellModel[,]
+﻿@model MinesweeperWebApp.GameEngine.MinesweeperGame
 
 @{
     ViewBag.Title = "Game";
@@ -7,17 +7,58 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>Minesweeper</title>
+    <style>
+        .cell {
+            background-color: lightgrey;
+            width: 50px;
+            height: 50px;
+        }
+    </style>
 </head>
 <body>
-    <div align="center">
-        @for (int x = 0; x < 10; x++)
-        {
-            for (int y = 0; y < 10; y++)
+    @using (Html.BeginForm("Restart", "Game"))
+    {
+        <div align="center">
+            @if (Model.win || Model.lose)
             {
-                <button type="submit" name="">
-                    <p>(@Model[x, y].Row, @Model[x, y].Col)</p>
-                    <p>@Model[x,y].LiveNeighbors</p>
-                    <p>@Model[x, y].IsLive</p>
+                <button class="btn btn-default" >Restart Game</button>
+            }
+        </div>
+    }
+@using (Html.BeginForm("OnCellClick", "Game"))
+{
+    <div class="row">
+        <div class="col-md-4" align="left">
+             <h2>Safe Spaces: @Model.safeSpaces</h2>
+        </div>
+        <div class="col-md-4" align="center">
+            <h2>Minesweeper</h2>
+        </div>
+        <div class="col-md-4" align="right">
+            @if (Model.win)
+            {
+                <h2>You Win!</h2>
+            }
+            else if (Model.lose)
+            {
+                <h2>You Lose!</h2>
+            }
+        </div>
+    </div>
+    <div align="center">
+        @for (int x = 0; x < Model.Length; x++)
+        {
+            for (int y = 0; y < Model.Length; y++)
+            {
+                <button type="submit" class="cell" name="cell" value="@Model.TheGrid[x,y].Row, @Model.TheGrid[x,y].Col">
+                   @if(Model.TheGrid[x,y].Visited && Model.TheGrid[x, y].IsLive)
+                   {
+                       <img src="~/Content/Images/Bomb.png" class="img-responsive"/>
+                   }
+                   @if(Model.TheGrid[x,y].Visited && !Model.TheGrid[x, y].IsLive)
+                   {
+                       <img src="~/Content/Images/@Model.TheGrid[x,y].LiveNeighbors).png" class="img-responsive"/>
+                   }
                 </button>
 
                 if (y == 9)
@@ -27,5 +68,6 @@
             }
         }
     </div>
+}
 </body>
 </html>
