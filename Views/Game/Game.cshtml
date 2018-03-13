@@ -1,8 +1,5 @@
-﻿@model MinesweeperWebApp.GameEngine.MinesweeperGame
-
-@{
-    ViewBag.Title = "Game";
-}
+﻿@using MinesweeperWebApp.GameEngine
+@model MinesweeperGame
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -25,49 +22,7 @@
             }
         </div>
     }
-@using (Html.BeginForm("OnCellClick", "Game"))
-{
-    <div class="row">
-        <div class="col-md-4" align="left">
-             <h2>Safe Spaces: @Model.safeSpaces</h2>
-        </div>
-        <div class="col-md-4" align="center">
-            <h2>Minesweeper</h2>
-        </div>
-        <div class="col-md-4" align="right">
-            @if (Model.win)
-            {
-                <h2>You Win!</h2>
-            }
-            else if (Model.lose)
-            {
-                <h2>You Lose!</h2>
-            }
-        </div>
-    </div>
-    <div align="center">
-        @for (int x = 0; x < Model.Length; x++)
-        {
-            for (int y = 0; y < Model.Length; y++)
-            {
-                <button type="submit" class="cell" name="cell" value="@Model.TheGrid[x,y].Row, @Model.TheGrid[x,y].Col">
-                   @if(Model.TheGrid[x,y].Visited && Model.TheGrid[x, y].IsLive)
-                   {
-                       <img src="~/Content/Images/Bomb.png" class="img-responsive"/>
-                   }
-                   @if(Model.TheGrid[x,y].Visited && !Model.TheGrid[x, y].IsLive)
-                   {
-                       <img src="~/Content/Images/@Model.TheGrid[x,y].LiveNeighbors).png" class="img-responsive"/>
-                   }
-                </button>
 
-                if (y == 9)
-                {
-                    <br />
-                }
-            }
-        }
-    </div>
-}
+        @Html.Partial("_GameBoard", Model)
 </body>
 </html>

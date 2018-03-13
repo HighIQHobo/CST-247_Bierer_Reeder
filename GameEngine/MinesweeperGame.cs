@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using MinesweeperWebApp.Models;
 
+//Created by: William Bierer & Stuart Reeder
+
 namespace MinesweeperWebApp.GameEngine
 {
     public class MinesweeperGame
@@ -23,6 +25,7 @@ namespace MinesweeperWebApp.GameEngine
             win = false;
         }
 
+        //Generate the grid and set mines
         private void Generate()
         {
 
@@ -94,6 +97,7 @@ namespace MinesweeperWebApp.GameEngine
             }
         }
 
+        //Reveal the entire grid (used after winning and losing)
         private void RevealGrid()
         {
             foreach(CellModel c in TheGrid)
@@ -102,6 +106,7 @@ namespace MinesweeperWebApp.GameEngine
             }
         }
 
+        //Check if a cell is valid (used for ProcessCell)
         private bool IsValid(int x, int y)
         {
             if (x >= 0 && x < Length && y >= 0 && y < Length)

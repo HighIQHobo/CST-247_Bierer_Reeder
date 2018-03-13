@@ -17,19 +17,27 @@ namespace MinesweeperWebApp.Controllers
             return View("Game", g);
         }
 
-        public ActionResult OnCellClick(string cell)
+        public ActionResult DisplayGameData()
         {
-            for(int row = 0; row < g.Length; row++)
+
+            return View("Game", g);
+        }
+
+
+        [HttpPost]
+        public PartialViewResult AjaxCellClick(string cell)
+        {
+            for (int row = 0; row < g.Length; row++)
             {
-                for(int col = 0; col < g.Length; col++)
+                for (int col = 0; col < g.Length; col++)
                 {
-                    if(cell.Equals(row + ", " + col))
+                    if (cell.Equals(row + ", " + col))
                     {
                         g.ProcessCell(g.TheGrid[row, col]);
                     }
                 }
             }
-            return View("Game", g);
+            return PartialView("_GameBoard", g);
         }
 
         public ActionResult Restart()

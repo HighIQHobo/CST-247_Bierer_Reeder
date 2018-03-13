@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
+//Created by: William Bierer & Stuart Reeder
+
 namespace MinesweeperWebApp.Models
 {
     public class GridModel
@@ -18,6 +20,7 @@ namespace MinesweeperWebApp.Models
             TheGrid = new CellModel[Length, Length];
         }
 
+        //Method for setting a mine in the cell, %10 for cell to contain a mine
         public void setMine()
         {
             foreach(CellModel c in TheGrid)
@@ -31,6 +34,7 @@ namespace MinesweeperWebApp.Models
             }
         }
 
+        //Count the number of liveneighbors in a cell
         public void CountNeighbors(CellModel c)
         {
             int col = c.Col;
@@ -53,6 +57,7 @@ namespace MinesweeperWebApp.Models
                 c.LiveNeighbors++;
         }
 
+        //Used for CountNeighbors method
         private bool IsValid(int x, int y)
         {
             if (x >= 0 && x < Length && y >= 0 && y <Length)
