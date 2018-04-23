@@ -25,5 +25,11 @@ namespace MinesweeperWebApp.Services.Business
             UserSecurityDAO service = new UserSecurityDAO();
             return service.Create(user);
         }
+        //Used to get the UserID based on the Username (needed for adding userID to the session)
+        public int GetIdFromName(string user)
+        {
+            UserSecurityDAO service = new UserSecurityDAO();
+            return service.GetIdFromName(user);
+        }
     }
 }

@@ -11,7 +11,7 @@ namespace MinesweeperWebApp.Models
     public class UserModel
     {
         [Key]
-        private string Id { get; set; }
+        public int Id { get; set; }
 
         [Display(Name = "First Name")]
         [Required(ErrorMessage = "First Name is a Required Field")]  //Determines the error messaging when creating a form

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 using MinesweeperWebApp.Models;
 
 //Created by: William Bierer & Stuart Reeder
@@ -16,6 +17,8 @@ namespace MinesweeperWebApp.GameEngine
         public bool win { get; set; }
         public bool lose { get; set; }
         public int safeSpaces { get; set; }
+        public int Clicks { get; set; }
+        public string message { get; set; }
 
         public MinesweeperGame()
         {
@@ -23,6 +26,8 @@ namespace MinesweeperWebApp.GameEngine
             TheGrid = Grid.TheGrid;
             lose = false;
             win = false;
+            message = "";
+            Clicks = 0;
         }
 
         //Generate the grid and set mines

@@ -11,7 +11,7 @@ namespace MinesweeperWebApp.Services.Data
     public class UserSecurityDAO
     {
         //Setup Connectioni String
-        string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\Will\\Dropbox\\School\\CST-247\\Workspace\\MinesweeperWebApp\\MinesweeperWebApp\\App_Data\\Minesweeper.mdf;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework";
+        string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\Wbier\\Dropbox\\School\\CST-247\\Workspace\\MinesweeperWebApp\\MinesweeperWebApp\\App_Data\\Minesweeper.mdf;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework";
 
         public bool FindByUser(UserModel user)
         {
@@ -92,6 +92,37 @@ namespace MinesweeperWebApp.Services.Data
             }
 
             // Return result of create
+            return result;
+        }
+        public int GetIdFromName(string Username)
+        {
+            int result = -1;
+
+            try
+            {
+                string query = "SELECT UserId FROM dbo.MS_User WHERE UserUsername=@Username";
+
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                using (SqlCommand cmd = new SqlCommand(query, cn))
+                {
+                    // Set query parameters and their values
+                    cmd.Parameters.Add("@Username", SqlDbType.VarChar, 50).Value = Username;
+
+                    // Open the connection, execute INSERT, and close the connection
+                    cn.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        return Convert.ToInt32(reader["UserId"]);
+                    }
+                    cn.Close();
+                }
+            }
+            catch(SqlException e)
+            {
+                throw e;
+            }
+
             return result;
         }
     }

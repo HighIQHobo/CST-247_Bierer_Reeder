@@ -24,7 +24,12 @@ namespace MinesweeperWebApp.Controllers
         {
             UserSecurityService service = new UserSecurityService();
             if (service.Authenticate(user))
+            {
+                //Add userID to the session
+                user.Id = service.GetIdFromName(user.Username);
+                Session.Add("UserId", user.Id);
                 return Redirect("/Game");
+            }
             else
                 return View("LoginFailed");
         }
