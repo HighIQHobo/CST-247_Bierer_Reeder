@@ -26,6 +26,19 @@
             width: 50px;
             height: 50px;
         }
+        .cell:hover {
+            background-color: gray;
+        }
+        .cell-clicked {
+            background-color: darkgrey;
+            width: 50px;
+            height: 50px;
+        }
+        .cell-bomb {
+            background-color: red;
+            width: 50px;
+            height: 50px;
+        }
     </style>
 </head>
 <body>
@@ -49,17 +62,22 @@
                 for (int y = 0; y < Model.Length; y++)
                 {
                     //generate a button for each Cell in TheGrid
-                    <button type="submit" class="cell" name="cell" value="@Model.TheGrid[x, y].Row, @Model.TheGrid[x, y].Col">
-                        @* Display image in button depending on if it has a bomb or the number of live neighbors *@
-                        @if (Model.TheGrid[x, y].Visited && Model.TheGrid[x, y].IsLive)
-                        {
+                    if (!Model.TheGrid[x, y].Visited)
+                    {
+                        <button type="submit" class="cell" name="cell" value="@Model.TheGrid[x, y].Row, @Model.TheGrid[x, y].Col"></button>
+                    }
+                    else if (Model.TheGrid[x, y].Visited && Model.TheGrid[x, y].IsLive)
+                    {
+                        <button type="submit" class="cell-bomb" name="cellVisited" value="@Model.TheGrid[x, y].Row, @Model.TheGrid[x, y].Col" disabled>
                             <img src="~/Content/Images/Bomb.png" class="img-responsive" />
-                        }
-                        @if (Model.TheGrid[x, y].Visited && !Model.TheGrid[x, y].IsLive)
-                        {
+                        </button>
+                    }
+                    else if (Model.TheGrid[x, y].Visited && !Model.TheGrid[x, y].IsLive)
+                    {
+                        <button type="submit" class="cell-clicked" name="cellVisited" value="@Model.TheGrid[x, y].Row, @Model.TheGrid[x, y].Col" disabled>
                             <img src="~/Content/Images/@Model.TheGrid[x, y].LiveNeighbors).png" class="img-responsive" />
-                        }
-                    </button>
+                        </button>
+                    }
 
                     //For button spacing
                     if (y == 9)
