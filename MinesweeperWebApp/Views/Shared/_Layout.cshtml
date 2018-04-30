@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top" style="background-color:darkslategray;">
+        <div class="container">
+            <div class="navbar-header" height: 110%; padding-top: 5%">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse" align ="right" style="">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <img src="~/Content/Images/Bomb.png" class="img-responsive" style="width:20%" />
+                    </li>
+                    <li style="font-size:45px; font-family:'Summit Display';">
+                        @Html.ActionLink("Netsweeper", "Index", "Home", new { area = "" }, null)
+                    </li>
+                    @{ 
+                        if(Convert.ToInt32(Session["UserID"]) != 0)
+                        {
+                            <li>@Html.ActionLink("Logout", "Logout", "Login", new { @class = "navbar-brand" }, null)</li>
+                        }
+                        else
+                        {
+                            <li>
+                                @Html.ActionLink("Login", "Index", "Login", new { @class = "navbar-brand" }, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("Register", "Index", "Register", new { @class = "navbar-brand" }, null)
+                            </li>
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+    <br />
+    <br />
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        @*<footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>*@
+    </div>
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewBag.Title = "Home";
+}
+<div>
+    <h2 align="center">Welcome to Netsweeper!</h2>
+    <br />
+    <p align="center">Create an Account and Log in to Play.</p>
+    @if (Convert.ToInt32(Session["UserID"]) != 0)
+    {
+        <button align="center" class="btn btn-default">
+            @Html.ActionLink("Play Netsweeper!", "DisplayGameData", "Game")
+        </button>
+    }
+
+</div>
+

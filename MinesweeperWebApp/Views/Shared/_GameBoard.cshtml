@@ -1,0 +1,86 @@
+﻿@using MinesweeperWebApp.GameEngine
+@model MinesweeperGame
+
+@* Created by: William Bierer & Stuart Reeder *@
+
+@{
+    ViewBag.Title = "Game";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    //Create AjaxOptions object for creating an Ajax form
+    AjaxOptions ajaxOptions = new AjaxOptions
+    {
+        HttpMethod = "POST",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "gameBoard",
+        OnSuccess = "ajaxSuccess"
+    };
+}
+
+<style>
+    .cell {
+        background-color: lightgrey;
+        width: 50px;
+        height: 50px;
+    }
+</style>
+
+@*Generate the number of Safe Spaces and Result message *@
+@using (Html.BeginForm("Index", "Game"))
+{
+    @Html.AntiForgeryToken();
+
+    <div class="row">
+        @* Display number of safe spaces *@
+        <div class="col-md-4" align="left">
+            <h2>Safe Spaces: @Model.safeSpaces</h2>
+        </div>
+        <div class="col-md-4" align="center">
+            <h2>Minesweeper</h2>
+        </div>
+        @* Display win/lose message depending on the result of the game *@
+        <div class="col-md-4" align="right">
+            @if (Model.win)
+                {
+                <h2>You Win!</h2>
+            }
+            else if (Model.lose)
+            {
+                <h2>You Lose!</h2>
+            }
+        </div>
+    </div>
+}
+
+@*Generate the Game Board using Ajax*@
+@using (Ajax.BeginForm("AjaxCellClick", "Game", ajaxOptions, new { id = "boardForm" }))
+{
+    <div id="gameBoard" align="center">
+    @for (int x = 0; x < Model.Length; x++)
+    {
+        for (int y = 0; y < Model.Length; y++)
+        {
+            //generate a button for each Cell in TheGrid
+            <button type="submit" class="cell" name="cell" value="@Model.TheGrid[x, y].Row, @Model.TheGrid[x, y].Col">
+                @* Display image in button depending on if it has a bomb or the number of live neighbors *@
+                @if (Model.TheGrid[x, y].Visited && Model.TheGrid[x, y].IsLive)
+                {
+                    <img src="~/Content/Images/Bomb.png" class="img-responsive" />
+                }
+                @if (Model.TheGrid[x, y].Visited && !Model.TheGrid[x, y].IsLive)
+                {
+                    <img src="~/Content/Images/@Model.TheGrid[x, y].LiveNeighbors).png" class="img-responsive" />
+                }
+            </button>
+
+            //For button spacing
+            if (y == 9)
+            {
+                <br />
+            }
+        }
+    }
+    </div>
+}
+
+
