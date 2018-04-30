@@ -1,7 +1,10 @@
 ﻿@using MinesweeperWebApp.GameEngine
 @model MinesweeperGame
 
-@* Created by: William Bierer & Stuart Reeder *@
+@* CST- 247
+    Prof. Reha
+    Created by: William Bierer @ Stuart Reeder
+    This is our work *@
 
 @{
     ViewBag.Title = "Game";
@@ -70,38 +73,9 @@
             {
                 <div align="center">@Model.message</div>
                 <br />
-                <p align="center">User ID: @Convert.ToInt32(Session["UserID"])</p>
 
                 <div id="gameBoard" align="center">
-                    @for (int x = 0; x < Model.Length; x++)
-                    {
-                        for (int y = 0; y < Model.Length; y++)
-                        {
-                            //generate a button for each Cell in TheGrid
-                            if (!Model.TheGrid[x, y].Visited)
-                            {
-                                <button type="submit" class="cell" name="cell" value="@Model.TheGrid[x, y].Row, @Model.TheGrid[x, y].Col"></button>
-                            }
-                            else if (Model.TheGrid[x, y].Visited && Model.TheGrid[x, y].IsLive)
-                            {
-                                <button type="submit" class="cell-bomb" name="cellVisited" value="@Model.TheGrid[x, y].Row, @Model.TheGrid[x, y].Col" disabled>
-                                    <img src="~/Content/Images/Bomb.png" class="img-responsive" />
-                                </button>
-                            }
-                            else if (Model.TheGrid[x, y].Visited && !Model.TheGrid[x, y].IsLive)
-                            {
-                                <button type="submit" class="cell-clicked" name="cellVisited" value="@Model.TheGrid[x, y].Row, @Model.TheGrid[x, y].Col" disabled>
-                                    <img src="~/Content/Images/@Model.TheGrid[x, y].LiveNeighbors).png" class="img-responsive" />
-                                </button>
-                            }
-
-                            //For button spacing
-                            if (y == 9)
-                            {
-                                <br />
-                            }
-                        }
-                    }
+                    @Html.Partial("_Gameboard", Model)
                 </div>
             }
         </div>

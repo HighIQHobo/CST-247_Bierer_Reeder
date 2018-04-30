@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
+//CST- 247
+//Prof. Reha
+//Created by: William Bierer @ Stuart Reeder
+//This is our work
+
 namespace MinesweeperWebApp.Models
 {
     public class CellModel

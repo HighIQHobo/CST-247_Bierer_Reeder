@@ -5,7 +5,10 @@ using System.Web;
 using System.Web.Mvc;
 using MinesweeperWebApp.Models;
 
-//Created by: William Bierer & Stuart Reeder
+//CST- 247
+//Prof. Reha
+//Created by: William Bierer @ Stuart Reeder
+//This is our work
 
 namespace MinesweeperWebApp.GameEngine
 {
@@ -35,9 +38,11 @@ namespace MinesweeperWebApp.GameEngine
         //Generate the grid and set mines
         private void Generate()
         {
-
+            //set the size of the grid to 10x10
             Grid = new GridModel(10);
             Length = Grid.Length;
+
+            //use nested for loops to generate a multi-dimentional array that represents the grid
             for (int r = 0; r < Length; r++)
             {
                 for(int c = 0; c < Length; c++)
@@ -46,8 +51,10 @@ namespace MinesweeperWebApp.GameEngine
                     
                 }
             }
+            //set mines throughout the grid
             Grid.setMine();
 
+            //count the number of safe spaces in the grid
             foreach(CellModel c in Grid.TheGrid)
             {
                 Grid.CountNeighbors(c);
@@ -97,6 +104,7 @@ namespace MinesweeperWebApp.GameEngine
                     safeSpaces--;
                 }
             }
+            //if safespaces = 0, set win to true and reveal the grid
             if (safeSpaces == 0)
             {
                 win = true;

@@ -1,4 +1,9 @@
-﻿using System;
+﻿//CST- 247
+//Prof. Reha
+//Created by: William Bierer @ Stuart Reeder
+//This is our work
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;

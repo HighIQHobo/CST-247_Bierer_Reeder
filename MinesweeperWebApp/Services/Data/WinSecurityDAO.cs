@@ -1,4 +1,9 @@
-﻿using System;
+﻿//CST- 247
+//Prof. Reha
+//Created by: William Bierer @ Stuart Reeder
+//This is our work
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,6 +15,7 @@ namespace MinesweeperWebApp.Services.Data
 {
 	public class WinSecurityDAO
 	{
+        //Create a Connection String
         string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\Will\\Dropbox\\School\\CST-247\\Workspace\\MinesweeperWebApp\\MinesweeperWebApp\\App_Data\\Minesweeper.mdf;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework";
 
         public bool create(int UserID, int Clicks, DateTime WinDate)

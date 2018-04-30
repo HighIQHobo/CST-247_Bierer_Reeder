@@ -4,8 +4,10 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 
-//Created by: William Bierer & Stuart Reeder
-//Model for the users
+//CST- 247
+//Prof. Reha
+//Created by: William Bierer @ Stuart Reeder
+//This is our work
 namespace MinesweeperWebApp.Models
 {
     public class UserModel
